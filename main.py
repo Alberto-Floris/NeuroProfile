@@ -12,7 +12,7 @@ data = {
     "creativita": np.random.randint(0, 11, 100),
     "organizzazione": np.random.randint(0, 11, 100),
     "rischio": np.random.randint(0, 11, 100),
-    "energia": np.random.randint(0, 11, 100),
+    "energia": np.random.randint(0, 11, 100),                              
 }
 
 df = pd.DataFrame(data)
@@ -115,6 +115,36 @@ if submit:
     if not nome.strip():
         st.warning("Inserisci il tuo nome.")
         st.stop()
+
+    if any(v == 0 for v in [socialita, creativita, organizzazione, rischio, energia]):
+        st.warning("Dai un valore a ogni tratto per avere una maggiore accuratezza nell'analisi")
+        st.stop()
+
+    import time
+
+    with st.spinner("Analisi in corso... 🧠"):
+        progress = st.progress(0)
+        status = st.empty()
+
+        for i in range(101):
+            time.sleep(0.03)
+            progress.progress(i)
+
+            # testo che cambia gradualmente
+            if i < 30:
+                status.text("Analisi delle risposte...")
+            elif i < 60:
+                status.text("Costruzione del profilo...")
+            elif i < 85:
+                status.text("Interpretazione dei tratti psicologici...")
+            else:
+                status.text("Finalizzazione del risultato...")
+
+        status.text("Analisi completata ✅")
+        time.sleep(0.5)
+
+    st.success("Profilo generato con successo!") 
+    st.balloons()
 
     user_data = np.array([[socialita, creativita, organizzazione, rischio, energia]])
     cluster = kmeans.predict(user_data)[0]
