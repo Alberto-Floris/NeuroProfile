@@ -214,7 +214,7 @@ if submit:
     ax.set_xticks(angles[:-1])
     ax.set_xticklabels(labels)
     ax.set_yticks(range(0, 11, 2))
-    ax.set_ylim(0, 10)
+    ax.set_ylim(0, 10.1)
     ax.set_position([0.1, 0.1, 0.8, 0.8])
 
     st.pyplot(fig)
