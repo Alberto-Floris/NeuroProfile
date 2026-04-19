@@ -7,7 +7,7 @@ def run():
         browser = p.chromium.launch()
         page = browser.new_page()
 
-        url = os.getenv("APP_URL", "https://quizpygym.streamlit.app/")
+        url = os.getenv("APP_URL", "https://neuroprofile.streamlit.app/")
         print(f"Visito: {url}")
         page.goto(url, timeout=60_000)
 
