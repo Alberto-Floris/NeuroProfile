@@ -218,3 +218,15 @@ if submit:
     ax.set_position([0.1, 0.1, 0.8, 0.8])
 
     st.pyplot(fig)
+
+    st.markdown("""
+<div style="text-align: center; font-size: 15px; color: #9ca3af; margin-top: 25px;">
+
+<strong style="color: #e5e7eb;">Creato da Alberto Floris</strong><br><br>
+
+<span>🧠 Machine Learning (KMeans)</span> &nbsp;|&nbsp;
+<span>📊 Analisi personalità</span> &nbsp;|&nbsp;
+<span>📈 Visualizzazione interattiva</span>
+
+</div>
+""", unsafe_allow_html=True)
