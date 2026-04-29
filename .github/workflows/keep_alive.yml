@@ -2,42 +2,26 @@ name: Keep App Alive
 
 on:
   schedule:
-    - cron: '0 10,22 * * *'
+    - cron: '0 */6 * * *'
   workflow_dispatch:
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   wake-up:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
 
-      - name: Installa Playwright
-        run: pip install playwright
-
-      - name: Cache Chromium
-        id: cache-chromium
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-chromium-${{ runner.os }}
-
-      - name: Installa Chromium (solo se non in cache)
-        if: steps.cache-chromium.outputs.cache-hit != 'true'
+      - name: Install Playwright
         run: |
+          pip install playwright
           playwright install chromium
-          playwright install-deps chromium
 
-      - name: Esegui script keep alive
+      - name: Run keep alive
         run: python keep_alive.py
         env:
           APP_URL: https://neuroprofile.streamlit.app/
